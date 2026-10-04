@@ -1,0 +1,495 @@
+:root{
+ /* Paleta cromática corporativa / de marca */
+  --ink: #0c1420;          /* Azul petróleo oscuro: fondos principales del hero y footer */
+  --ink-soft: #1c2838;     /* Tono intermedio oscuro: bordes y contrastes secundarios */
+  --paper: #f5f3ff;        /* Fondo gris claro suave: base neutra para lectura cómoda */
+  --card: #ffffff;         /* Blanco puro: contenedores de contenido y tarjetas */
+  --text: #1c2430;         /* Color principal del texto: alto contraste y legibilidad */
+  --text-muted: #5b6572;   /* Gris medio: textos secundarios, metadatos y descripciones */
+  
+  /* Colores de acento e interacción */
+  --accent: #d9ff03;       /* Amarillo ámbar: llamadas a la acción principales (CTA) y cursores */
+  --accent-2: #06a77d; 
+  --acent-3:#ff94b8;     /* Verde esmeralda: enlaces activos, bordes y acentos visuales */
+  --line: #dde2e8;         /* Gris claro suave: separadores, divisores y bordes sutiles */
+
+
+  /* Tipografías */
+  --font-display: 'Nunito',sans-serif; /* Tipografía para encabezados (h1, h2, h3) */
+  --font-body: 'Poppins', sans-serif;           /* Tipografía neutra y legible para texto corrido */
+}
+
+/* Está diciendo que Para todos los elementos de mi página, haz que el ancho incluya padding y bordes, y elimina 
+los márgenes y espacios internos que el navegador coloca automáticamente, así más adelante puedo decidir esas medidas*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*Este código mejora la accesibilidad al desactivar las animaciones
+ y transiciones cuando el usuario ha indicado que prefiere reducir el movimiento en pantalla.
+ evita movimientos que puedan resultarle incómodos para algunas personas.*/
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--paper);
+  line-height: 1.6; /* Altura de línea idónea para lectura ergonómica */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Enlaces limpios:  quitan el subrayado feo por defecto */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+}
+
+section {
+  padding: 56px 20px; /* Espaciado vertical y lateral cómodo para dispositivos móviles */
+}
+
+/* Envoltorio central para delimitar el ancho máximo cuando la pantalla sea mayor */
+.wrap {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.información{ 
+     background-color: var(--ink);
+  color: #f4f6f8;
+  padding: 80px 20px 64px;
+  position: relative; /* Crea el contexto de posicionamiento para la cuadrícula decorativa */
+  overflow: hidden;   /* Evita barras de desplazamiento si un efecto desborda */
+}
+
+/* Capa decorativa que simula una cuadrícula sutil de terminal de programación */
+.información::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Cubre todo el fondo: top:0, right:0, bottom:0, left:0 */
+  background:
+    linear-gradient(180deg, transparent 0%, var(--ink) 92%),
+    repeating-linear-gradient(90deg, rgba(230, 66, 66, 0.035) 0 1px, transparent 1px 64px);
+  pointer-events: none; /* Permite hacer clic o seleccionar texto a través de esta capa */
+}
+.contenedor1{max-width: 980px;
+  margin: 0 auto;
+  position: relative; /* Queda visible por encima del pseudo-elemento de fondo */
+  animation: rise 0.7s ease-out both; /* Animación de entrada suave */}
+
+
+  /* Animación de elevación al cargar la página */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Simulación visual de comando prompt: daniela@frontend:~$ whoami */
+.prompt {
+  font-display: 'Nunito', monospace;
+  font-size: 0.9rem;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+/*esto hace que se haga la animación del cursor*/
+.prompt::after {
+  content: "";
+  width: 8px;
+  height: 1.1em;
+  background-color: var(--accent);
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+
+.contenedor1 h1{
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 700;
+  max-width: 14ch; /* Limita la longitud a 14 caracteres aprox. para un quiebre visual elegante */
+}
+
+.contenedor1 .role{
+
+    margin-top: 14px;
+  font-size: 1.1rem;
+  color: #c3cad3;
+  max-width: 46ch;
+}
+
+.contenedor .meta{
+
+    margin-top: 16px;
+  font-size: 0.92rem;
+  color: #8b95a3;
+}
+
+.cta-row {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap; /* En móviles pequeños, si no caben uno al lado del otro, se apilan */}
+
+
+
+  .btn {
+  display:inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/*esto hace que el al pasar encima el mouse el boton tenga el efecto de hacerse grande*/
+.btn:active {
+  transform: scale(0.98);
+}
+/*aqui le estoy dando el color al botón*/
+.btn-solid {
+  background-color: var(--accent);
+  color: var(--ink);
+}
+
+.btn-outline {
+  border-color: #3a4658;
+  color: #eef1f5;
+}
+
+.social-row {
+  margin-top: 38px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: #9aa4b1;
+}
+
+/*esto no se aplicó, pero si pongo está función se aplica el solido transparente 
+en toda la palabra, lo que hace que al pasar 
+el cursor esta pueda cambiar de color , con el que se agregó abajo
+
+
+.social-row{
+border-bottom: 1px solid transparent;
+
+}
+
+.social-row a:hover{
+border-color: var(--accent);
+  color: var(--accent);
+}*/
+
+
+.social-row a {
+  border-bottom: 1px solid transparent;
+}
+
+.social-row a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.contenedor2 {
+  display: grid;
+  grid-template-columns: 1fr; /* Una sola columna fluida en móvil */
+  gap: 28px;
+  align-items: start;
+}
+.avatar{
+
+    width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover; /* Recorta la imagen proporcionalmente sin deformarla */
+  box-shadow: 0 12px 28px rgba(12, 20, 32, 0.12);
+}
+
+/*primero se ponen los elementos del contenedor madre en display, se alinea al centro
+y se establece un espacio entre ellos con justify content: space*/
+
+.contenedor1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.texto {
+  flex: 2;
+}
+
+.imagen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+}
+
+
+.Contenedor2 h2 {
+  font-size: 1.7rem;
+  margin-bottom: 16px;
+}
+
+.Contenedor2  p {
+  color: var(--text-muted);
+  }
+
+  /*separa párrafos continuos sin margen en el primero, la distancia del ultimo párrafo con el primero*/
+  .Contenedor2  p + p {
+  margin-top: 14px;
+}
+
+.habilidades {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  margin-top: 26px;}
+
+  .contenedor3 h3{
+    font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--acent-3); /* Línea decorativa verde */
+  }
+
+  .habilidades-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background-color: var(--card);
+  color: var(--text);}
+  
+  .p{
+    border: 1px solid var(--line);
+  border-radius: 4px;
+  background-color: var(--card);
+  color: var(--text);
+
+justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;}
+
+  .T{
+    border: 1px solid var(--line);
+  border-radius: 4px;
+  background-color: var(--card);
+  color: var(--text);
+
+justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;}
+
+   .B{
+    border: 1px solid var(--line);
+  border-radius: 4px;
+  background-color: var(--card);
+  color: var(--text);
+
+justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;}
+  
+
+  .projects{
+    display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 26px;
+  gap: 16px;
+  flex-wrap: wrap;
+  }
+
+  .project-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+ .projects h3{
+
+    font-size: 1.15rem;
+ }
+
+.contenedor5{
+ position: relative;
+  margin-top: 30px;
+  padding-left: 28px;
+
+
+
+}
+
+
+.contenedor5::before{
+content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background-color: var(--line);
+
+}
+
+.item{position: relative;
+  padding-bottom: 30px;}
+
+  item::before{border-color: var(--acent-3);}
+  
+
+.item h3 {
+    font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+
+.tl-item span.badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.item p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-top: 4px;
+}
+
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--paper);
+  border: 3px solid var(--accent-2);}
+
+
+  .contact.contenedor6{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.contact h2 {
+  font-size: 1.7rem;
+  max-width: 22ch;
+}
+
+.contact p {
+  color: #9aa4b1;
+  margin-top: 10px;
+  max-width: 42ch;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-links a {
+  font-size: 0.95rem;
+}
+
+.contact-links a:hover {
+  color: var(--accent-2);
+}
+
+footer {
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background-color: var(--ink-soft);
+}
+.A{ border: 1px solid var(--line);
+  border-radius: 4px;
+  background-color: var(--card);
+  color: var(--text);
+padding: 24px 20px;}
+  
+  .E{border: 1px solid var(--line);
+  border-radius: 4px;
+  background-color: var(--card);
+  color: var(--text);
+  padding: 24px 20px;
+
+  }
+
+  .I{border: 1px solid var(--line);
+  border-radius: 4px;
+  background-color: var(--card);
+  color: var(--text);
+padding: 24px 20px;
+
+  }
+
+  .contact{
+    background-color:#5b6572
+  }
+
+  .contact h2{color: #eef1f5;}
+
+  .contact p{color: #eef1f5;}
+
+  .contact a {color: #eef1f5;}
